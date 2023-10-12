@@ -1,0 +1,7 @@
+{
+  "name": "ipack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

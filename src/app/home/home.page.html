@@ -1,69 +1,57 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title> iPack </ion-title>
-
-    <ion-buttons slot="primary">
-      <ion-button
-        fill="solid"
-        size="small"
-        color="primary"
-        (click)="openAdditionModal('container')"
-      >
-        <ion-icon
-          slot="start"
-          name="add"
-        ></ion-icon
-        >Container
-      </ion-button>
-
-      <ion-button
-        fill="solid"
-        size="small"
-        color="primary"
-        (click)="openAdditionModal('thing')"
-      >
-        <ion-icon
-          slot="start"
-          name="add"
-        ></ion-icon
-        >Thing
-      </ion-button>
-    </ion-buttons>
+    <ion-toggle
+                [ngModel]="(options$ | async)?.editMode"
+                (ngModelChange)="onEditModeToggle($event)"
+                slot="end"
+                enable-on-off-labels="true"
+                label-placement="end" class="app-mode-toggle">Edit mode</ion-toggle>
   </ion-toolbar>
 </ion-header>
 
 <ion-content
-  [fullscreen]="true"
   class="ion-padding"
 >
-  <ion-refresher
-    slot="fixed"
-    (ionRefresh)="refresh($event)"
-  >
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
   <ion-grid>
     <ion-row>
       <ion-col
         size="12"
         size-md="6"
       >
-        <ion-title size="large">Things</ion-title>
+        <ion-title size="large">Things
+          <ion-fab vertical="center" edge="true">
+            <ion-fab-button size="small" (click)="openAdditionModal('thing')">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-title>
         <div
           class="app-things-wrap"
           dndDropzone
           (dndDrop)="onDrop($event)"
         >
-          <app-things [data]="things | async | filterOrphanThings" />
+          <app-things [data]="things$ | async | filterOrphanThings" [editMode]="(options$ | async)?.editMode" />
         </div>
+
+
       </ion-col>
       <ion-col
         size="12"
         size-md="6"
       >
-        <ion-title size="large">Containers</ion-title>
-        <app-containers />
+        <ion-title size="large">Containers
+          <ion-fab vertical="center" edge="true">
+            <ion-fab-button size="small" (click)="openAdditionModal('container')">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-title>
+        <div
+          class="app-containers-wrap"
+        >
+          <app-containers [editMode]="(options$ | async)?.editMode" />
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,8 +1,12 @@
 <ion-chip
   *ngFor="let thing of data"
   [dndDraggable]="generateDraggableData(thing)"
-  [class]="size === 'small' && 'app-thing_small'"
+  [className]="size === 'small' && 'app-thing_small'"
   class="app-thing"
 >
+  <ion-icon *ngIf="editMode" name="pencil" size="small" color="primary"
+            (click)="onEditThing(thing)"></ion-icon>
   {{ thing.name }}
+  <ion-icon *ngIf="editMode" name="close-circle-outline" color="danger"
+            (click)="onRemoveThing(thing)"></ion-icon>
 </ion-chip>

@@ -3,7 +3,7 @@
     <ion-col
       size="12"
       size-md="4"
-      *ngFor="let container of data.containers | async"
+      *ngFor="let container of containers$ | async"
     >
       <ion-card
         color="light"
@@ -14,6 +14,9 @@
           >{{ container.name }}
           <p>
             <small>({{ container.volumeUsed }} of {{ container.volume }} cm3)</small>
+            <ion-progress-bar
+              [color]="getProgressColor(container.volumeUsed / container.volume)"
+              [value]="container.volumeUsed / container.volume"></ion-progress-bar>
           </p>
           <div class="app-container__things">
             <app-things
@@ -22,6 +25,20 @@
             />
           </div>
         </ion-card-content>
+        <ion-button
+          size="small"
+          fill="clear"
+          *ngIf="editMode"
+          (click)="onEditContainer(container)">
+          <ion-icon name="pencil" color="primary"></ion-icon>
+        </ion-button>
+        <ion-button
+          size="small"
+          fill="clear"
+          *ngIf="editMode"
+          (click)="onRemoveContainer(container)">
+          <ion-icon name="close-circle-outline" color="danger"></ion-icon>
+        </ion-button>
       </ion-card>
     </ion-col>
   </ion-row>

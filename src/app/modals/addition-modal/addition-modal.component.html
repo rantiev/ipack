@@ -14,28 +14,36 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-list>
-    <ion-item>
-      <ion-label position="stacked">Name</ion-label>
-      <ion-input
-        type="text"
-        placeholder="Enter name here"
-        [(ngModel)]="name"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Volume</ion-label>
-      <ion-input
-        type="number"
-        placeholder="Enter volume here"
-        [(ngModel)]="volume"
-      ></ion-input>
-    </ion-item>
-    <ion-button
-      class="app-addion-modal-submit"
-      (click)="submit()"
-      [disabled]="!name || !volume && volume !== 0"
-      >Add {{ modalType }}</ion-button
-    >
-  </ion-list>
+  <form nonvalidate #form="ngForm"
+        (ngSubmit)="onSubmit(form)">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input
+          type="text"
+          name="name"
+          placeholder="Enter name here"
+          required
+          [(ngModel)]="model.name"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Volume</ion-label>
+        <ion-input
+          type="number"
+          name="volume"
+          placeholder="Enter volume here"
+          required
+          min="0"
+          [(ngModel)]="model.volume"
+        ></ion-input>
+      </ion-item>
+      <ion-button
+        class="app-addion-modal-submit"
+        type=”submit”
+        [disabled]="!form.valid || model.name === data?.name && model.volume === data?.volume"
+      >{{ data ? 'Edit' : 'Add' }} {{ modalType }}</ion-button
+      >
+    </ion-list>
+  </form>
 </ion-content>

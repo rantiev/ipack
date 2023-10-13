@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core'
 import { ModalController } from '@ionic/angular'
 import { Container, DataService, Thing } from '../../services/data.service'
 import { nanoid } from 'nanoid'
+import { SnackBarService } from '../../services/snackbar.services'
 
 @Component({
   selector: 'app-addition-modal',
@@ -15,7 +16,8 @@ export class AdditionModalComponent {
 
   constructor(
     private modalCtrl: ModalController,
-    private data: DataService
+    private data: DataService,
+    private snackService: SnackBarService
   ) {}
 
   cancel() {
@@ -46,5 +48,7 @@ export class AdditionModalComponent {
     } else {
       this.data.addThing(thing)
     }
+
+    this.snackService.openSnackBar(`${this.name} was added`, '')
   }
 }

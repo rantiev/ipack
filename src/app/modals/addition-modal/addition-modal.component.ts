@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { ModalController } from '@ionic/angular'
+import { Container, DataService, Thing } from '../../services/data.service'
+import { nanoid } from 'nanoid'
 
 @Component({
   selector: 'app-addition-modal',
@@ -11,7 +13,10 @@ export class AdditionModalComponent {
   name: string
   volume: number
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private data: DataService
+  ) {}
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel')
@@ -21,5 +26,25 @@ export class AdditionModalComponent {
     return this.modalCtrl.dismiss(this.modalType, 'confirm')
   }
 
-  submit() {}
+  submit() {
+    const thing: Thing = {
+      id: nanoid(),
+      name: this.name,
+      volume: this.volume
+    }
+
+    if (this.modalType === 'container') {
+      const container: Container = Object.assign(
+        {
+          volumeUsed: 0,
+          things: []
+        },
+        thing
+      )
+
+      this.data.addContainer(container)
+    } else {
+      this.data.addThing(thing)
+    }
+  }
 }

@@ -1,0 +1,28 @@
+<ion-grid>
+  <ion-row>
+    <ion-col
+      size="12"
+      size-md="4"
+      *ngFor="let container of data.containers | async"
+    >
+      <ion-card
+        color="light"
+        dndDropzone
+        (dndDrop)="onDrop($event, container)"
+      >
+        <ion-card-content
+          >{{ container.name }}
+          <p>
+            <small>({{ container.volumeUsed }} of {{ container.volume }} cm3)</small>
+          </p>
+          <div class="app-container__things">
+            <app-things
+              [data]="container.things"
+              [size]="'small'"
+            />
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

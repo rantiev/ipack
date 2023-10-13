@@ -1,25 +1,70 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Inbox
-    </ion-title>
+    <ion-title> iPack </ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button
+        fill="solid"
+        size="small"
+        color="primary"
+        (click)="openAdditionModal('container')"
+      >
+        <ion-icon
+          slot="start"
+          name="add"
+        ></ion-icon
+        >Container
+      </ion-button>
+
+      <ion-button
+        fill="solid"
+        size="small"
+        color="primary"
+        (click)="openAdditionModal('thing')"
+      >
+        <ion-icon
+          slot="start"
+          name="add"
+        ></ion-icon
+        >Thing
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+<ion-content
+  [fullscreen]="true"
+  class="ion-padding"
+>
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="refresh($event)"
+  >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="12"
+        size-md="6"
+      >
+        <ion-title size="large">Things</ion-title>
+        <div
+          class="app-things-wrap"
+          dndDropzone
+          (dndDrop)="onDrop($event)"
+        >
+          <app-things [data]="things | async | filterOrphanThings" />
+        </div>
+      </ion-col>
+      <ion-col
+        size="12"
+        size-md="6"
+      >
+        <ion-title size="large">Containers</ion-title>
+        <app-containers />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

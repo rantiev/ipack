@@ -13,6 +13,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "semi": [2, "never"],
         "@angular-eslint/component-class-suffix": [
           "error",
           {

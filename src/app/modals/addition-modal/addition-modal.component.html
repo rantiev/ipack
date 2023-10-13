@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button
+        fill="solid"
+        shape="round"
+        color="primary"
+        (click)="cancel()"
+      >
+        <ion-icon name="close">Cancel</ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="app-capitalized">{{ modalType }} addition</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input
+        type="text"
+        placeholder="Enter name here"
+        [(ngModel)]="name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Volume</ion-label>
+      <ion-input
+        type="number"
+        placeholder="Enter volume here"
+        [(ngModel)]="volume"
+      ></ion-input>
+    </ion-item>
+    <ion-button
+      class="app-addion-modal-submit"
+      (click)="submit()"
+      >Add {{ modalType }}</ion-button
+    >
+  </ion-list>
+</ion-content>

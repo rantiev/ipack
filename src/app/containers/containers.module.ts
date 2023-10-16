@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
-import { RouterModule } from '@angular/router'
-
-import { IonicModule } from '@ionic/angular'
-
-import { ContainersComponent } from './containers.component'
-import { DndModule } from 'ngx-drag-drop'
+import { ContainersListComponent } from './containers-list/containers-list.component'
 import { ThingsComponentModule } from '../things/things.module'
+import { ContainersSectionComponent } from './containers-section/containers-section.component'
+import { SharedComponentsModule } from '../_shared/components/shared-components.module'
+import { ContainersListItemComponent } from './containers-list-item/containers-list-item.component'
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule, DndModule, ThingsComponentModule],
-  declarations: [ContainersComponent],
-  exports: [ContainersComponent]
+  imports: [ThingsComponentModule, SharedComponentsModule],
+  declarations: [ContainersListComponent, ContainersSectionComponent, ContainersListItemComponent],
+  exports: [ContainersListComponent, ContainersSectionComponent, ContainersListItemComponent]
 })
 export class ContainersComponentModule {}

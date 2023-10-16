@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
-import { RouterModule } from '@angular/router'
 
-import { IonicModule } from '@ionic/angular'
-
-import { ThingsComponent } from './things.component'
+import { ThingsListComponent } from './things-list/things-list.component'
 import { DndModule } from 'ngx-drag-drop'
+import { ThingsSectionComponent } from './things-section/things-section.component'
+import { PipesModule } from '../_shared/pipes/pipes.module'
+import { SharedComponentsModule } from '../_shared/components/shared-components.module'
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule, DndModule],
-  declarations: [ThingsComponent],
-  exports: [ThingsComponent]
+  imports: [SharedComponentsModule],
+  declarations: [ThingsListComponent, ThingsSectionComponent],
+  exports: [ThingsListComponent, ThingsSectionComponent]
 })
 export class ThingsComponentModule {}

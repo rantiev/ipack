@@ -1,0 +1,40 @@
+<ion-card
+  color="light"
+  dndDropzone
+  [dndDraggable]="generateDraggableData(container)"
+  (dndDrop)="onDrop($event, container)"
+>
+  <ion-card-content
+  >{{ container.name }}
+    <p>
+      <small>({{ container.volumeUsed }} of {{ container.volume }} cm3)</small>
+      <ion-progress-bar
+        [color]="getProgressColor(container.volumeUsed / container.volume)"
+        [value]="container.volumeUsed / container.volume"></ion-progress-bar>
+    </p>
+    <div class="app-container__things">
+      <app-things-list
+        [data]="container.children | filterThings"
+        [size]="'small'"
+      />
+      <app-containers-list
+        [data]="container.children | filterContainers"
+      />
+    </div>
+  </ion-card-content>
+  <ion-button
+    size="small"
+    fill="clear"
+    *ngIf="editMode"
+    (click)="onEditContainer(container)"
+    [disabled]="container.children.length">
+    <ion-icon name="pencil" color="primary"></ion-icon>
+  </ion-button>
+  <ion-button
+    size="small"
+    fill="clear"
+    *ngIf="editMode"
+    (click)="onRemoveContainer(container)">
+    <ion-icon name="close-circle-outline" color="danger"></ion-icon>
+  </ion-button>
+</ion-card>

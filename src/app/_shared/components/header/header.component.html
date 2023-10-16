@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> iPack </ion-title>
+    <ion-toggle
+      [ngModel]="(options$ | async)?.editMode"
+      (ngModelChange)="onEditModeToggle($event)"
+      slot="end"
+      enable-on-off-labels="true"
+      label-placement="end" class="app-mode-toggle">Edit mode</ion-toggle>
+  </ion-toolbar>
+</ion-header>

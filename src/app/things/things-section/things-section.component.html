@@ -1,0 +1,10 @@
+<app-section-title title="Things" entity="thing" />
+
+<div
+  class="app-things-wrap"
+  dndDropzone
+  (dndDrop)="onDrop($event)"
+>
+  <app-things-list [data]="things$ | async | filterOrphanThings"
+              [editMode]="(options$ | async)?.editMode" />
+</div>

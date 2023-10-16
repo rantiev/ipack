@@ -1,0 +1,8 @@
+<app-section-title title="Containers" entity="container" />
+
+<div
+  dndDropzone
+  (dndDrop)="onDropOut($event)" class="app-containers-wrap">
+  <app-containers-list [data]="containers$ | async | filterOrphanContainers"
+                       [editMode]="(options$ | async)?.editMode" />
+</div>

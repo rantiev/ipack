@@ -17,7 +17,8 @@ export enum EThingsActions {
   RemoveThing = '[Thing] Remove Thing',
   RemoveThingSuccess = '[Thing] Remove Thing success',
   RemoveThingError = '[Thing] Remove Thing error',
-  UpdateParent = '[Thing] Update parent'
+  UpdateParent = '[Thing] Update parent',
+  OnContainerRemoved = '[Thing] On Container removed'
 }
 
 export class GetThings implements Action {
@@ -80,6 +81,11 @@ export class UpdateThingParent implements Action {
   constructor(public payload: { content: IThing; parentId: string }) {}
 }
 
+export class OnContainerRemoved implements Action {
+  public readonly type = EThingsActions.OnContainerRemoved
+  constructor(public payload: { container: IContainer; shouldRemoveContent: boolean }) {}
+}
+
 export type ThingsActions =
   | GetThings
   | GetThingsSuccess
@@ -94,3 +100,4 @@ export type ThingsActions =
   | RemoveThingSuccess
   | RemoveThingError
   | UpdateThingParent
+  | OnContainerRemoved

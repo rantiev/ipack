@@ -123,18 +123,24 @@ export class ContainersEffects {
     )
   )
 
-  deleteContainerSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(EContainersActions.RemoveContainerSuccess),
-        tap((action: RemoveContainerSuccess) => {
-          this.snackbarService.openSnackBar(
-            `Container "${action.payload.container.name}" removed`,
-            ''
-          )
-        })
-      ),
-    { dispatch: false }
+  deleteContainerSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EContainersActions.RemoveContainerSuccess),
+      map((action: RemoveContainerSuccess) => {
+        this.snackbarService.openSnackBar(
+          `Container "${action.payload.container.name}" removed`,
+          ''
+        )
+
+        return {
+          type: EThingsActions.OnContainerRemoved,
+          payload: {
+            container: action.payload.container,
+            shouldRemoveContent: action.payload.shouldRemoveContent
+          }
+        }
+      })
+    )
   )
 
   deleteContainerError$ = createEffect(

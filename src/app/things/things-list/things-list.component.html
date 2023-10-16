@@ -1,6 +1,7 @@
 <ion-chip
   *ngFor="let thing of data"
   [dndDraggable]="generateDraggableData(thing)"
+  [dndType]="'thing'"
   [className]="size === 'small' && 'app-thing_small'"
   class="app-thing"
 >

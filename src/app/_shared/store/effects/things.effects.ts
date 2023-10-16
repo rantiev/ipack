@@ -6,6 +6,7 @@ import {
   EditThing,
   EditThingSuccess,
   EThingsActions,
+  OnContainerRemoved,
   RemoveThing,
   RemoveThingSuccess
 } from '../actions/things.actions'

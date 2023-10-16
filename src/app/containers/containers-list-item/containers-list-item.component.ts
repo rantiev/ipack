@@ -35,6 +35,12 @@ export class ContainersListItemComponent {
       return
     }
 
+    // If user drags container over itself slighly it tries to be added into itself
+    // Considering this as dnd lib issue, fixing with ID check.
+    if (container.id === content.id) {
+      return
+    }
+
     this.store.dispatch(new FillContainerSuccess({ container, content }))
   }
 

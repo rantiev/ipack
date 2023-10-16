@@ -1,7 +1,13 @@
 .app-containers-wrap {
+  position: relative;
   margin: 32px 0;
   padding: 16px 10px 40px;
   min-height: 100px;
   border: 1px dashed #bfbfbf;
   border-radius: 10px;
+
+  & > app-containers-list {
+    position: relative;
+    z-index: 2;
+  }
 }

@@ -1,7 +1,7 @@
 import { IContainerState, initialContainersState } from '../state/containers.state'
 import { ContainerActions, EContainersActions } from '../actions/containers.actions'
 import { cloneDeep } from 'lodash'
-import { IContainer } from '../../entities/container'
+import { IContainer, isContainer } from '../../entities/container'
 
 export const containersReducers = (
   state = initialContainersState,
@@ -30,9 +30,30 @@ export const containersReducers = (
     }
 
     case EContainersActions.RemoveContainerSuccess: {
+      const containers = cloneDeep(state.containers)
+
+      const container = action.payload.container
+
+      if (action.payload.shouldRemoveContent) {
+        const idsToRemove = [container.id, ...container.children.map((el) => el.id)]
+
+        return {
+          ...state,
+          containers: [...containers.filter((el) => !idsToRemove.includes(el.id))]
+        }
+      }
+
+      container.children.forEach((child) => {
+        const childContainer = containers.find((el) => child.id === el.id)
+
+        if (childContainer) {
+          childContainer.parentId = ''
+        }
+      })
+
       return {
         ...state,
-        containers: [...state.containers.filter((el) => el.id !== action.payload.container.id)]
+        containers: [...containers.filter((el) => el.id !== action.payload.container.id)]
       }
     }
 
@@ -90,7 +111,14 @@ export const containersReducers = (
 
       if (newContainer) {
         if (!newContainer.children.find((el) => el.id === content.id)) {
-          newContainer.children = [...newContainer.children, content]
+          const realObject = isContainer(content)
+            ? containers.find((el) => el.id === content.id)
+            : content
+
+          if (realObject) {
+            newContainer.children = [...newContainer.children, realObject]
+          }
+
           updateContainerVolume(containers, newContainer, content.volume)
         }
 

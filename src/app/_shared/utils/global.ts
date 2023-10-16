@@ -1,12 +1,13 @@
 import { IThing } from '../entities/thing'
-import { IContainer } from '../entities/container'
+import { IContainer, isContainer } from '../entities/container'
 
 export function generateDraggableData(data: IThing | IContainer) {
   return {
     data,
     effectAllowed: true,
     disable: false,
-    handle: false
+    handle: false,
+    type: isContainer(data) ? 'container' : 'thing'
   }
 }
 

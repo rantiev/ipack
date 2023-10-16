@@ -1,8 +1,10 @@
 <ion-card
   color="light"
   dndDropzone
+  [dndType]="'container'"
   [dndDraggable]="generateDraggableData(container)"
   (dndDrop)="onDrop($event, container)"
+  class="app-containers-list-item"
 >
   <ion-card-content
   >{{ container.name }}
@@ -37,4 +39,5 @@
     (click)="onRemoveContainer(container)">
     <ion-icon name="close-circle-outline" color="danger"></ion-icon>
   </ion-button>
+  <div dndPlaceholderRef class="app-dnd-area" dndDragoverClass="app-dnd-area_drag-over"></div>
 </ion-card>

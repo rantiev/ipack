@@ -2,9 +2,11 @@
 
 <div
   class="app-things-wrap"
-  dndDropzone
+  [dndDropzone]="['thing']"
   (dndDrop)="onDrop($event)"
 >
   <app-things-list [data]="things$ | async | filterOrphanThings"
               [editMode]="(options$ | async)?.editMode" />
+
+  <div dndPlaceholderRef class="app-dnd-area" dndDragoverClass="app-dnd-area_drag-over"></div>
 </div>

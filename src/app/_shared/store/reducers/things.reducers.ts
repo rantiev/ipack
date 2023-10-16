@@ -45,6 +45,30 @@ export const thingsReducers = (state = initialThingsState, action: ThingsActions
       }
     }
 
+    case EThingsActions.OnContainerRemoved: {
+      let things = cloneDeep(state.things)
+
+      if (action.payload.shouldRemoveContent) {
+        const childIds = action.payload.container.children.map((el) => el.id)
+
+        return {
+          ...state,
+          things: things.filter((el) => !childIds.includes(el.id))
+        }
+      }
+
+      return {
+        ...state,
+        things: things.map((el) => {
+          if (el.parentId === action.payload.container.id) {
+            el.parentId = ''
+          }
+
+          return el
+        })
+      }
+    }
+
     default:
       return state
   }

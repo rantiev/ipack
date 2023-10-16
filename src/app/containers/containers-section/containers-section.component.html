@@ -1,8 +1,10 @@
 <app-section-title title="Containers" entity="container" />
 
 <div
-  dndDropzone
+  [dndDropzone]="['container']"
   (dndDrop)="onDropOut($event)" class="app-containers-wrap">
   <app-containers-list [data]="containers$ | async | filterOrphanContainers"
                        [editMode]="(options$ | async)?.editMode" />
+
+  <div dndPlaceholderRef class="app-dnd-area" dndDragoverClass="app-dnd-area_drag-over"></div>
 </div>

@@ -9,7 +9,7 @@
   <ion-card-content
   >{{ container.name }}
     <p>
-      <small>({{ container.volumeUsed }} of {{ container.volume }} cm3)</small>
+      <small>({{ container.volumeUsed }} of {{ container.volume }} cm<sup>3</sup>)</small>
       <ion-progress-bar
         [color]="getProgressColor(container.volumeUsed / container.volume)"
         [value]="container.volumeUsed / container.volume"></ion-progress-bar>

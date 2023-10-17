@@ -13,8 +13,7 @@ import {
 import { map, mergeMap, EMPTY, catchError, of, tap } from 'rxjs'
 import { ContainersService } from '../../../containers/containers.service'
 import { SnackBarService } from '../../services/snackbar.service'
-import { IContainer, isContainer, TContent } from '../../entities/container'
-import { IThing } from '../../entities/thing'
+import { IContainer, isContainer } from '../../entities/container'
 import { EThingsActions } from '../actions/things.actions'
 
 @Injectable()

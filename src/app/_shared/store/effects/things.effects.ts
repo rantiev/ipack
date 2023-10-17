@@ -51,7 +51,7 @@ export class ThingsEffects {
       this.actions$.pipe(
         ofType(EThingsActions.AddThingSuccess),
         tap(() => {
-          this.snackbarService.openSnackBar('IThing was added', '')
+          this.snackbarService.openSnackBar('Thing was added', '')
         })
       ),
     { dispatch: false }

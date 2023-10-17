@@ -10,7 +10,6 @@ import { DndDropEvent } from 'ngx-drag-drop'
 import { Store } from '@ngrx/store'
 import { IAppState } from '../../_shared/store/state/app.state'
 import { AlertController, ModalController } from '@ionic/angular'
-import { generateDraggableData, getProgressColor } from '../../_shared/utils/global'
 
 @Component({
   selector: 'app-containers-list-item',
@@ -110,13 +109,5 @@ export class ContainersListItemComponent {
     })
 
     await alert.present()
-  }
-
-  getProgressColor(p: number): string {
-    return getProgressColor(p)
-  }
-
-  generateDraggableData(container: IContainer) {
-    return generateDraggableData(container)
   }
 }

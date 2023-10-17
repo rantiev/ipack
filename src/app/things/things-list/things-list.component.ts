@@ -4,7 +4,6 @@ import { IAppState } from '../../_shared/store/state/app.state'
 import { AlertController, ModalController } from '@ionic/angular'
 import { RemoveThing } from '../../_shared/store/actions/things.actions'
 import { AdditionModalComponent } from '../../_shared/modals/addition-modal/addition-modal.component'
-import { generateDraggableData } from '../../_shared/utils/global'
 import { IThing } from '../../_shared/entities/thing'
 
 type TComponentSize = 'small' | 'default'
@@ -24,10 +23,6 @@ export class ThingsListComponent {
     private alertController: AlertController,
     private modalController: ModalController
   ) {}
-
-  generateDraggableData(thing: IThing) {
-    return generateDraggableData(thing)
-  }
 
   async onEditThing(thing: IThing) {
     const modal = await this.modalController.create({

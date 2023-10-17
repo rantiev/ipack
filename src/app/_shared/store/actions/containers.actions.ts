@@ -23,8 +23,7 @@ export enum EContainersActions {
   RemoveItemSuccess = '[Container] Remove Item from Container success',
   RemoveItemError = '[Container] Remove Item from Container error',
   UpdateParent = '[Container] Update parent',
-  RemoveParent = '[Container] Remove parent',
-  Noop = '[Container] Noop'
+  RemoveParent = '[Container] Remove parent'
 }
 
 export class GetContainers implements Action {
@@ -121,10 +120,6 @@ export class RemoveItemError implements Action {
   public readonly type = EContainersActions.RemoveItemError
 }
 
-export class Noop implements Action {
-  public readonly type = EContainersActions.Noop
-}
-
 export type ContainerActions =
   | GetContainers
   | GetContainersSuccess
@@ -146,4 +141,3 @@ export type ContainerActions =
   | RemoveItem
   | RemoveItemSuccess
   | RemoveItemError
-  | Noop

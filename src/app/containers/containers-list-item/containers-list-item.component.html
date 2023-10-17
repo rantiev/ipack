@@ -2,7 +2,7 @@
   color="light"
   dndDropzone
   [dndType]="'container'"
-  [dndDraggable]="generateDraggableData(container)"
+  [dndDraggable]="container | draggableData"
   (dndDrop)="onDrop($event, container)"
   class="app-containers-list-item"
 >
@@ -11,7 +11,7 @@
     <p>
       <small>({{ container.volumeUsed }} of {{ container.volume }} cm<sup>3</sup>)</small>
       <ion-progress-bar
-        [color]="getProgressColor(container.volumeUsed / container.volume)"
+        [color]="(container.volumeUsed / container.volume) | progressColor"
         [value]="container.volumeUsed / container.volume"></ion-progress-bar>
     </p>
     <div class="app-container__things">

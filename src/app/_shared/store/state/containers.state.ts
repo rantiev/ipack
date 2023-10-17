@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import { IContainer } from '../../entities/container'
 
 export interface IContainerState {
